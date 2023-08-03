@@ -1,4 +1,4 @@
-import { FormProps } from "../CreateNotes/CreateNotes";
+import { FormProps } from "../CreateNotes";
 
 export function Buttons(props: FormProps): JSX.Element {
     const handleCloseClick = (event: React.MouseEvent) => {

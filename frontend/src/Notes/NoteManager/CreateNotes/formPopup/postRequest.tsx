@@ -2,15 +2,18 @@ import axios from "axios";
 
 function postRequest(
     title: FormDataEntryValue | null,
-    note: FormDataEntryValue | null
+    note: FormDataEntryValue | null,
+    setRefreshApi: React.Dispatch<React.SetStateAction<number>>
 ) {
     axios
-        .post("", {
+        .post("http://127.0.0.1:8000/notes/", {
             title: title,
             content: note,
         })
-        .then(function (response) {
-            console.log(response);
+        .then(function () {
+            setRefreshApi((oldNbr) => {
+                return oldNbr + 1;
+            });
         })
         .catch(function (error) {
             console.log(error);

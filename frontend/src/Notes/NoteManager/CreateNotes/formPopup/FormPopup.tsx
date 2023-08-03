@@ -2,13 +2,19 @@ import { FormProps } from "../CreateNotes";
 import { Buttons } from "./Buttons";
 import postRequest from "./postRequest";
 
-function handleSubmit(e: any) {
+function handleSubmit(e: any, props: FormProps) {
+    e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const title = formData.get("title");
     const note = formData.get("note");
 
-    postRequest(title, note);
+    if (title === "" || note === "") {
+        alert("Both fields must be filled out");
+        return;
+    }
+    postRequest(title, note, props.setRefreshApi);
+    props.setFormPopup(false);
 }
 
 function Input(): JSX.Element {
@@ -34,7 +40,7 @@ function Input(): JSX.Element {
 function Form(props: FormProps): JSX.Element {
     return (
         <form
-            onSubmit={handleSubmit}
+            onSubmit={(e) => handleSubmit(e, props)}
             className=" text-4xl pt-8 flex flex-col h-full"
             action=""
         >
@@ -45,8 +51,6 @@ function Form(props: FormProps): JSX.Element {
 }
 
 export function FormPopup(props: FormProps): JSX.Element {
-    console.log(props.formPopup);
-
     if (props.formPopup === true) {
         return (
             <div className="fixed inset-0 flex items-center justify-center z-40">

@@ -4,7 +4,7 @@ import { Props } from "../../NotesList";
 async function deleteNote(id: any, props: Props) {
     try {
         await axios.delete(`http://127.0.0.1:8000/notes/${id}/`);
-        props.setDeleteClick((number) => {
+        props.setRefreshApi((number) => {
             let newNumber = number + 1;
             return newNumber;
         });

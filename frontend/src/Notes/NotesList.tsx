@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { PropsRefresh } from ".";
 import { DeleteNotes } from "./NoteManager/DeleteNotes/DeleteNotes";
 
 export type Props = {
     note: any;
-    setDeleteClick: React.Dispatch<React.SetStateAction<number>>;
+    setRefreshApi: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function getAllNotes(deleteClick: number): any {
+function getAllNotes(refreshApi: number): any {
     const [allNotes, setAllNotes] = useState<any>([]);
 
     useEffect(() => {
@@ -19,7 +20,7 @@ function getAllNotes(deleteClick: number): any {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [deleteClick]);
+    }, [refreshApi]);
     return allNotes;
 }
 
@@ -42,9 +43,8 @@ function Note(props: Props): JSX.Element {
     );
 }
 
-function NoteList(): JSX.Element {
-    const [deleteClick, setDeleteClick] = useState(0);
-    const allNotes = getAllNotes(deleteClick);
+function NoteList(propsRefresh: PropsRefresh): JSX.Element {
+    const allNotes = getAllNotes(propsRefresh.refreshApi);
     let index: number = 0;
     return (
         <div className="py-10 flex justify-center h-full">
@@ -53,7 +53,7 @@ function NoteList(): JSX.Element {
                     index += 1;
                     let props: Props = {
                         note: note,
-                        setDeleteClick: setDeleteClick,
+                        setRefreshApi: propsRefresh.setRefreshApi,
                     };
                     return <Note key={index} {...props} />;
                 })}
