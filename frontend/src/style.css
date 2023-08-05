@@ -538,6 +538,10 @@ video {
   position: relative;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .inset-0 {
   inset: 0px;
 }
@@ -556,6 +560,34 @@ video {
 
 .top-full {
   top: 100%;
+}
+
+.bottom-0 {
+  bottom: 0px;
+}
+
+.left-0 {
+  left: 0px;
+}
+
+.bottom-40 {
+  bottom: 10rem;
+}
+
+.bottom-20 {
+  bottom: 5rem;
+}
+
+.bottom-24 {
+  bottom: 6rem;
+}
+
+.bottom-28 {
+  bottom: 7rem;
+}
+
+.bottom-32 {
+  bottom: 8rem;
 }
 
 .z-50 {
@@ -586,6 +618,10 @@ video {
   margin: 3rem;
 }
 
+.m-\[\2212 40px\] {
+  margin: −40px;
+}
+
 .mx-24 {
   margin-left: 6rem;
   margin-right: 6rem;
@@ -599,6 +635,11 @@ video {
 .mx-20 {
   margin-left: 5rem;
   margin-right: 5rem;
+}
+
+.my-12 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .ml-2 {
@@ -749,6 +790,14 @@ video {
   justify-content: space-between;
 }
 
+.gap-36 {
+  gap: 9rem;
+}
+
+.gap-60 {
+  gap: 15rem;
+}
+
 .gap-y-0 {
   row-gap: 0px;
 }
@@ -757,6 +806,14 @@ video {
   --tw-space-x-reverse: 0;
   margin-right: calc(2rem * var(--tw-space-x-reverse));
   margin-left: calc(2rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 
 .rounded-lg {

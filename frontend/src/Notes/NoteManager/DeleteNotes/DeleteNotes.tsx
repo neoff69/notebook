@@ -18,13 +18,14 @@ export function DeleteNotes(props: Props): JSX.Element {
     return (
         <button
             onClick={(e) => {
+                e.stopPropagation();
                 deleteNote(props.note.id, props);
                 e.preventDefault();
             }}
             className="p-1 h-8 absolute top-0 right-0 hover:h-9"
         >
             <img
-                src="/img/remove.png"
+                src="/img/delete.png"
                 alt="delete"
                 className="p-1 h-8 hover:h-9"
             />

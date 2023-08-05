@@ -13,6 +13,10 @@ function handleSubmit(e: any, props: FormProps) {
         alert("Both fields must be filled out");
         return;
     }
+    if (title && title.length > 50) {
+        alert("Title too long");
+        return;
+    }
     postRequest(title, note, props.setRefreshApi);
     props.setFormPopup(false);
 }
@@ -45,7 +49,7 @@ function Form(props: FormProps): JSX.Element {
             action=""
         >
             <Input />
-            <Buttons {...props} />
+            <Buttons setPopup={props.setFormPopup} />
         </form>
     );
 }

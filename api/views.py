@@ -7,7 +7,6 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from rest_framework import status
 from .models import Note
-from django.http import JsonResponse
 
 
 class AllNotes(APIView):
@@ -23,18 +22,6 @@ class AllNotes(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-class CreateNote(APIView):
-    def post(self, request, *args, **kwargs):
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-
-        response_data = {
-            'title': title,
-            'content': content
-        }
-
-        return JsonResponse(response_data)
 class SingleNote(APIView):
     def get_object(self, request, id):
         try:
@@ -55,5 +42,15 @@ class SingleNote(APIView):
             raise NotFound()
         note.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def put(self, request, id):
+        note = self.get_object(request, id)
+        
+        serializer = MyModelSerializer(note, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
       
 

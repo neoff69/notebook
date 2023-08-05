@@ -6,7 +6,7 @@ function postRequest(
     setRefreshApi: React.Dispatch<React.SetStateAction<number>>
 ) {
     axios
-        .post("http://127.0.0.1:8000/notes/", {
+        .post(`http://127.0.0.1:8000/notes/`, {
             title: title,
             content: note,
         })

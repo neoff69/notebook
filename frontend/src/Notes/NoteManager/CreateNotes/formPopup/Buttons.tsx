@@ -1,25 +1,22 @@
 import { FormProps } from "../CreateNotes";
 
-export function Buttons(props: FormProps): JSX.Element {
+export function Buttons({
+    setPopup,
+}: {
+    setPopup: React.Dispatch<React.SetStateAction<boolean>>;
+}): JSX.Element {
     const handleCloseClick = (event: React.MouseEvent) => {
         event.stopPropagation();
-        props.setFormPopup(false);
+        setPopup(false);
     };
 
     return (
-        <div className="flex justify-between px-28 py-12">
+        <div className="flex justify-center gap-60 px-28 py-12 bg-white ">
             <button type="button" onClick={handleCloseClick}>
                 <img
                     className="h-12 justify-end content-end"
                     src=" /img/remove.png"
                     alt="Close"
-                />
-            </button>
-            <button type="button">
-                <img
-                    className="h-12 justify-end content-end"
-                    src=" /img/refresh.png"
-                    alt="Refresh"
                 />
             </button>
             <button type="submit">

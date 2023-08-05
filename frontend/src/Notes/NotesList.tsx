@@ -2,14 +2,21 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { PropsRefresh } from ".";
 import { DeleteNotes } from "./NoteManager/DeleteNotes/DeleteNotes";
+import NotePopup from "./NoteManager/NotePopup/NotePopup";
 
 export type Props = {
     note: any;
     setRefreshApi: React.Dispatch<React.SetStateAction<number>>;
 };
 
+export type NotePopupProps = {
+    noteProps: Props;
+    notePopup: boolean;
+    setNotePopup: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 function getAllNotes(refreshApi: number): any {
-    const [allNotes, setAllNotes] = useState<any>([]);
+    const [allNotes, setAllNotes] = useState([]);
 
     useEffect(() => {
         axios
@@ -25,10 +32,17 @@ function getAllNotes(refreshApi: number): any {
 }
 
 function Note(props: Props): JSX.Element {
+    const [notePopup, setNotePopup] = useState(false);
+    let notePopupProps: NotePopupProps = {
+        noteProps: props,
+        notePopup: notePopup,
+        setNotePopup: setNotePopup,
+    };
+
     return (
         <div className="m-1 flex">
-            <a
-                href="/"
+            <div
+                onClick={() => setNotePopup(true)}
                 className="relative bg-stone-100 w-full rounded-lg flex justify-center items-center space-x-8 hover:bg-blue-100"
             >
                 <img
@@ -38,7 +52,8 @@ function Note(props: Props): JSX.Element {
                 />
                 <h3 className=" text-xl">{props.note.title}</h3>
                 <DeleteNotes {...props} />
-            </a>
+                <NotePopup {...notePopupProps} />
+            </div>
         </div>
     );
 }
